@@ -35,9 +35,10 @@ describe('Todo API:', function () {
   });
 
   /*
-  * NON STANDARD:
-  * Do not drop database after each test in ord allows student to inspect the DB
-  * and make Postman or CURL calls to the endpoints 
+  * NON-STANDARD:
+  * 
+  * To allow students to query the DB and make Postman or CURL calls
+  * to the endpoints we do *DNOT* dropDatabase after each test 
   */
   // afterEach(function () {
   //   return mongoose.connection.dropDatabase();
@@ -145,7 +146,7 @@ describe('Todo API:', function () {
         });
     });
 
-    it('should respond ', function () {
+    it('should respond with 400 status when given bad data', function () {
       const badItem = {
         foobar: 'broken item'
       };
@@ -166,7 +167,7 @@ describe('Todo API:', function () {
 
   describe('PUT /v1/todos/:id', function () {
 
-    it('should update item', function () {
+    it('should update item when given valid data and an id', function () {
       const item = {
         'title': 'Buy New Dishes'
       };
@@ -187,14 +188,16 @@ describe('Todo API:', function () {
         });
     });
 
-    it('should respond', function () {
+    it('should respond with 400 status when given bad data', function () {
       const badItem = {
         foobar: 'broken item'
       };
       const spy = chai.spy();
-      return chai.request(app)
-        .put('/v1/todos/aaaaaaaaaaaaaaaaaaaaaaaa')
-        .send(badItem)
+      
+      return Todo.findOne()
+        .then(doc => {
+          return chai.request(app).put(`/v1/todos/${doc._id}`).send(badItem);
+        })
         .then(spy)
         .then(() => {
           spy.should.not.have.been.called();
@@ -226,10 +229,8 @@ describe('Todo API:', function () {
   describe('DELETE /v1/todos/:id', function () {
 
     it('should delete an item by id', function () {
-      let doc;
       return Todo.findOne()
-        .then(_doc => {
-          doc = _doc
+        .then(doc => {
           return chai.request(app).delete(`/v1/todos/${doc._id}`);
         })
         .then(res => {
