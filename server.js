@@ -50,18 +50,23 @@ app.use(function (req, res, next) {
 });
 
 // Error handler
-// NOTE: we'll prevent stacktrace leak in later exercise
+// Only show stacktrace if 'env' is 'development'
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.json({
     message: err.message,
-    error: err
+    error: (process.env.NODE_ENV === 'development') ? err : {}
   });
 });
 
 
-const server = app.listen(process.env.PORT, function () {
-  console.log('Your app is listening on port ' + server.address().port);
-});
+if (require.main === module) {
+  const server = app.listen(process.env.PORT, function () {
+    console.log('Your app is listening on port ' + server.address().port);
+  });
+}
+
+module.exports = app; // Export for testing
+
 
 module.exports = app 
