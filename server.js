@@ -2,9 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const app = express(); 
-
 const User = require('./models');
+const { PORT } = require('./config');
+
+const app = express(); 
 
 app.use(express.json()); // Parse JSON body
 
@@ -50,7 +51,6 @@ app.use(function (req, res, next) {
 });
 
 // Error handler
-// Only show stacktrace if 'env' is 'development'
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.json({
@@ -61,12 +61,9 @@ app.use(function (err, req, res, next) {
 
 
 if (require.main === module) {
-  const server = app.listen(process.env.PORT, function () {
+  const server = app.listen(PORT, function () {
     console.log('Your app is listening on port ' + server.address().port);
   });
 }
 
 module.exports = app; // Export for testing
-
-
-module.exports = app 
