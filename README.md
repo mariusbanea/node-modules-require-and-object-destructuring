@@ -38,6 +38,7 @@ DATABASE_URL=mongodb://<USER>:<PASSWORD>@ds112345.mlab.com:12345/<DBNAME>
 
 ## Exercise
 
-...
+- ...
+- The test results will help guide the way
 
 You have successfully completed the task when all the unit tests pass and the client applications works without any errors.

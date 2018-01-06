@@ -11,9 +11,7 @@ const Todo = require('../models');
 const seedData = require('../db/todos.json');
 const { DATABASE_URL } = require('../config');
 
-chai.should();
-const expect = chai.expect; 
-const assert = require('chai').assert;
+const should = chai.should();
 
 chai.use(chaiHttp);
 chai.use(chaiSpies);
