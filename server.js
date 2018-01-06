@@ -25,7 +25,7 @@ app.get('/v1/todos/:id', (req, res, next) => {
   Todo.findById(id)
     .then(item => {
       if (item) {
-        res.json(item);
+        res.json(item.serialize());
       } else {
         next(); // 404 handler
       }

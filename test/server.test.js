@@ -69,51 +69,42 @@ describe('Todo API:', () => {
   describe('GET /v1/todos', function () {
 
     it('should respond to GET `/v1/todos` with an array of todos and status 200', function () {
-      // return chai.request(app)
-      //   .get('/v1/todos')
-      //   .then(function (res) {
-      //     res.should.have.status(200);
-      //     res.should.be.json;
-      //     res.body.should.be.a('array');
-      //     res.body.should.have.length(5);
-      //     res.body.forEach(function (item) {
-      //       item.should.be.a('object');
-      //       item.should.include.keys('id', 'title', 'completed');
-      //     });
-      //   });
+      return chai.request(app)
+        .get('/v1/todos')
+        .then(function (res) {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('array');
+          res.body.should.have.length(5);
+          res.body.forEach(function (item) {
+            item.should.be.a('object');
+            item.should.include.keys('id', 'title', 'completed');
+          });
+        });
     });
 
   });
 
-  describe.only('GET /v1/todos/:id', function () {
+  describe('GET /v1/todos/:id', function () {
 
-    it.only('should return correct todo when given an id', function () {
+    it('should return correct todo when given an id', function () {
       let todoId;
-      console.log('============')
-      Todo.findOne().then(doc => {
-        todoId = doc._id;
-        true.should.be.true;
-      }).catch(err => console.log(err));
-      
-      
-      
-      return chai.request(app)
-        .get(`/v1/todos/${todoId}`)
+      return Todo.findOne()
+        .then(doc => chai.request(app).get(`/v1/todos/${doc._id}`))
         .then(function (res) {
           res.should.have.status(200);
           res.should.be.json;
           res.body.should.be.an('object');
           res.body.should.include.keys('id', 'title', 'completed');
-          res.body.id.should.equal(1002);
-          res.body.title.should.equal('Vacuum');
           res.body.completed.should.be.false;
         });
     });
 
-    it('should respond with a 404 when given an invalid id', function () {
+    it.only('should respond with a 404 when given an invalid id', function () {
       const spy = chai.spy();
       return chai.request(app)
-        .get('/v1/todos/9999')
+        .get('/v1/todos/5a50f828d63e165f3504e9c2')
+        .get('/v1/todos/aaaaaaaaaaaaaaaaaaaaaaaa')
         .then(spy)
         .then(() => {
           spy.should.not.have.been.called();
