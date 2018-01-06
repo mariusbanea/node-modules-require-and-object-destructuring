@@ -9,38 +9,100 @@ const app = express();
 
 app.use(express.json()); // Parse JSON body
 
-app.get('/users', (req, res, next) => {
-  User.find()
-    .then(users => {
-      res.json(users.map(user => user.serialize()));
-    })
-    .catch(next);
+/**
+ * ADD ENDPOINTS HERE
+ */
+app.get('/', (req, res, next) => {
+
+  // Using promises
+  todos.find({})
+    .then(list => res.json(list))
+    .catch(next); // error handler
+
 });
 
-app.get('/users/:id', (req, res, next) => {
-  User.findById(req.params.id)
-    .then(user => res.json(user.serialize()))
-    .catch(next);
-});
+app.post('/', (req, res, next) => {
+  const { title } = req.body;
 
-app.post('/users', (req, res, next) => {
-  const {fullname, username, password} = req.body; 
+  /***** Never trust users - validate input *****/
+  if (!title) {
+    const err = new Error('Missing `title` in request body');
+    err.status = 400;
+    return next(err); // error handler
+  }
+  const newItem = { title };
+  newItem.completed = false;
   
-  User.create({fullname, username, password})
-    .then(user => res.status(201).json(user.serialize()))
-    .catch(next);
+  // Using promises
+  todos.create(newItem)
+    .then(item => res.location(`/items/${item.id}`).status(201).json(item))
+    .catch(next); // error handler
+
 });
 
-app.put('/users', (req, res, next) => {
-  User.findByIdAndUpdate(req.params.id, req.body)
-    .then(() => res.status(204).end())
-    .catch(next);
+app.get('/:id', (req, res, next) => {
+  const id = req.params.id;
+
+  // Using promises
+  todos.findById(id)
+    .then(item => {
+      if (item) {
+        res.json(item);
+      } else {
+        next(); // 404 handler
+      }
+    })
+    .catch(next); // error handler
+
 });
 
-app.delete('/user/:id', (req, res, next) => {
-  User.findByIdAndRemove(req.params.id)
-    .then(() => res.status(204).end())
-    .catch(next);
+app.put('/:id', (req, res, next) => {
+  const id = req.params.id;
+
+  /***** Never trust users - validate input *****/
+  const replaceItem = {};
+  const updateableFields = ['title', 'completed'];
+
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      replaceItem[field] = req.body[field];
+    }
+  });
+
+  /***** Never trust users - validate input *****/
+  if (!replaceItem.title) {
+    const err = new Error('Missing `title` in request body');
+    err.status = 400;
+    return next(err); // error handler
+  }
+
+  // Using promises
+  app.findByIdAndUpdate(id, replaceItem)
+    .then(item => {
+      if (item) {
+        res.json(item);
+      } else {
+        next(); // 404 handler
+      }
+    })
+    .catch(next); // error handler
+
+});
+
+app.delete('/:id', (req, res, next) => {
+  const id = req.params.id;
+
+  // Using promises
+  todos.findByIdAndRemove(id)
+    .then(count => {
+      if (count) {
+        res.status(204).end();
+      } else {
+        next(); // 404 handler
+      }
+    })
+    .catch(next); // error handler
+    
 });
 
 // 404 catch-all
