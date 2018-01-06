@@ -66,30 +66,39 @@ describe('Todo API:', () => {
 
   });
 
-  describe.only('GET /v1/todos', function () {
+  describe('GET /v1/todos', function () {
 
     it('should respond to GET `/v1/todos` with an array of todos and status 200', function () {
-      return chai.request(app)
-        .get('/v1/todos')
-        .then(function (res) {
-          res.should.have.status(200);
-          res.should.be.json;
-          res.body.should.be.a('array');
-          res.body.should.have.length(5);
-          res.body.forEach(function (item) {
-            item.should.be.a('object');
-            item.should.include.keys('id', 'title', 'completed');
-          });
-        });
+      // return chai.request(app)
+      //   .get('/v1/todos')
+      //   .then(function (res) {
+      //     res.should.have.status(200);
+      //     res.should.be.json;
+      //     res.body.should.be.a('array');
+      //     res.body.should.have.length(5);
+      //     res.body.forEach(function (item) {
+      //       item.should.be.a('object');
+      //       item.should.include.keys('id', 'title', 'completed');
+      //     });
+      //   });
     });
 
   });
 
-  describe('GET /v1/todos/:id', function () {
+  describe.only('GET /v1/todos/:id', function () {
 
-    it('should return correct todo when given an id', function () {
+    it.only('should return correct todo when given an id', function () {
+      let todoId;
+      console.log('============')
+      Todo.findOne().then(doc => {
+        todoId = doc._id;
+        true.should.be.true;
+      }).catch(err => console.log(err));
+      
+      
+      
       return chai.request(app)
-        .get('/v1/todos/1002')
+        .get(`/v1/todos/${todoId}`)
         .then(function (res) {
           res.should.have.status(200);
           res.should.be.json;
