@@ -12,7 +12,9 @@ Live coding practice interview question
 
 ## The "Rules"
 
-- You should attempt to complete this challenge without looking at any other resources such as googling stack-overflow, documentation or course materials. However, you may ask the interviewer clarifying questions at any point.
+
+- You should attempt to complete this challenge without looking at any other resources such as googling, stack-overflow, documentation or course materials. However, you may look at any of the files in the project including the schema in the `models.js` file and the integration tests in `test/server.test.js` and you may ask the interviewer clarifying questions at any point.
+
 - If you get stuck you have 3 lifelines (like Who Wants to Be a Millionaire)
   - 1) Online documentation - browse Express, Mongoose, Chai, Chai-Http docs
   - 2) Interview Hint - Ask the interview for a hint
@@ -34,3 +36,11 @@ DATABASE_URL=mongodb://<USER>:<PASSWORD>@ds112345.mlab.com:12345/<DBNAME>
 - You should see output from 10 integration tests
 
 ## Test
+
+## Test
+
+Add the GET `/v1/todos/` endpoint to this application.
+
+You have successfully completed the task when all the unit tests pass and the client applications works without any errors.
+
+You may look at any of the files in the project including the schema in the `models.js` file and the integration tests in `test/server.test.js`
