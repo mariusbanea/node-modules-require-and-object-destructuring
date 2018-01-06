@@ -117,10 +117,11 @@ describe('Todo API:', () => {
 
   describe('POST /v1/todos', function () {
 
-    it.only('should create and return a new todo when provided valid data', function () {
+    it('should create and return a new todo when provided valid data', function () {
       const newItem = {
         'title': 'Do Dishes'
       };
+
       return chai.request(app)
         .post('/v1/todos')
         .send(newItem)
@@ -129,7 +130,6 @@ describe('Todo API:', () => {
           res.should.be.json;
           res.body.should.be.a('object');
           res.body.should.include.keys('id', 'title', 'completed');
-          res.body.id.should.equal(1005);
           res.body.title.should.equal(newItem.title);
           res.body.completed.should.equal(false);
           res.should.have.header('location');
@@ -155,15 +155,15 @@ describe('Todo API:', () => {
 
   });
 
-  describe('PUT /v1/todos/:id', function () {
+  describe.only('PUT /v1/todos/:id', function () {
 
-    it('should update item', function () {
+    it.only('should update item', function () {
       const item = {
         'title': 'Buy New Dishes'
       };
-      return chai.request(app)
-        .put('/v1/todos/1005')
-        .send(item)
+      
+      return Todo.findOne()
+        .then(doc => chai.request(app).put(`/v1/todos/${doc._id}`).send(item))
         .then(function (res) {
           res.should.have.status(200);
           res.should.be.json;

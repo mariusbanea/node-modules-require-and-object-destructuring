@@ -45,38 +45,42 @@ app.post('/v1/todos', (req, res, next) => {
 
   // Using promises
   Todo.create({title})
-    .then(newItem => res.location(`/items/${newItem.id}`).status(201).json(newItem.serialize()))
+    .then(newItem => {
+      res.status(201)
+        .location(`/items/${newItem.id}`)
+        .json(newItem.serialize());
+  })
     .catch(next);
 
 });
 
-// app.put('/v1/todos/:id', (req, res, next) => {
-//   const id = req.params.id;
-//   /***** Never trust users - validate input *****/
-//   const replaceItem = {};
-//   const updateableFields = ['title', 'completed'];
-//   updateableFields.forEach(field => {
-//     if (field in req.body) {
-//       replaceItem[field] = req.body[field];
-//     }
-//   });
-//   /***** Never trust users - validate input *****/
-//   if (!replaceItem.title) {
-//     const err = new Error('Missing `title` in request body');
-//     err.status = 400;
-//     return next(err); // error handler
-//   }
-//   // Using promises
-//   app.findByIdAndUpdate(id, replaceItem)
-//     .then(item => {
-//       if (item) {
-//         res.json(item);
-//       } else {
-//         next(); // 404 handler
-//       }
-//     })
-//     .catch(next); // error handler
-// });
+app.put('/v1/todos/:id', (req, res, next) => {
+  const id = req.params.id;
+  /***** Never trust users - validate input *****/
+  const updateItem = {};
+  const updateableFields = ['title', 'completed'];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      updateItem[field] = req.body[field];
+    }
+  });
+  /***** Never trust users - validate input *****/
+  if (!updateItem.title) {
+    const err = new Error('Missing `title` in request body');
+    err.status = 400;
+    return next(err); // error handler
+  }
+  // Using promises
+  Todo.findByIdAndUpdate(id, updateItem, { new: true })
+    .then(item => {
+      if (item) {
+        res.json(item.serialize());
+      } else {
+        next(); // 404 handler
+      }
+    })
+    .catch(next); // error handler
+});
 
 // app.delete('/v1/todos/:id', (req, res, next) => {
 //   const id = req.params.id;
