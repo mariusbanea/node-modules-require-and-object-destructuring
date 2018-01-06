@@ -14,4 +14,4 @@ function divide(a, b) {
   return a / b;
 }
 
-modules.exports = {add, subtract, multiply, divide}
+module.exports = {add, subtract, multiply, divide};
