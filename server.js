@@ -8,12 +8,8 @@ const { PORT, DATABASE_URL } = require('./config');
 const seedData = require('./db/todos.json');
 
 const app = express(); 
+app.use(express.json());
 
-app.use(express.json()); // Parse JSON body
-
-/**
- * ADD ENDPOINTS HERE
- */
 app.get('/v1/todos', (req, res, next) => {
   Todo.find()
     .then(todos => res.json(todos.map(todo => todo.serialize())))
@@ -68,7 +64,7 @@ app.put('/v1/todos/:id', (req, res, next) => {
   if (!updateItem.title) {
     const err = new Error('Missing `title` in request body');
     err.status = 400;
-    return next(err); // error handler
+    return next(err);
   }
   // Using promises
   Todo.findByIdAndUpdate(id, updateItem, { new: true })
@@ -76,25 +72,25 @@ app.put('/v1/todos/:id', (req, res, next) => {
       if (item) {
         res.json(item.serialize());
       } else {
-        next(); // 404 handler
+        next();
       }
     })
-    .catch(next); // error handler
+    .catch(next);
 });
 
-// app.delete('/v1/todos/:id', (req, res, next) => {
-//   const id = req.params.id;
-//   // Using promises
-//   todos.findByIdAndRemove(id)
-//     .then(count => {
-//       if (count) {
-//         res.status(204).end();
-//       } else {
-//         next(); // 404 handler
-//       }
-//     })
-//     .catch(next); // error handler
-// });
+app.delete('/v1/todos/:id', (req, res, next) => {
+  const id = req.params.id;
+  // Using promises
+  Todo.findByIdAndRemove(id)
+    .then(count => {
+      if (count) {
+        res.status(204).end();
+      } else {
+        next();
+      }
+    })
+    .catch(next);
+});
 
 // 404 catch-all
 app.use(function (req, res, next) {
