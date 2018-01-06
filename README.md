@@ -1,6 +1,15 @@
 Live coding practice interview question
 =======================================
 
+## Overview
+
+- Application: FullStack Todo Application, the client is based on [Todo MVC](http://todomvc.com/)
+- Stack:
+  - Client: Basic jQuery selectors, event-handlers, DOM manipulation and AJAX
+  - Web Server: Node and Express with Mongoose 
+  - Database: Mongo hosted by [MLab](mlab.com)
+  - Tests: Mocha, Chai, Chai-Http and Shai-Spies
+
 ## The "Rules"
 
 - You should attempt to complete this challenge without looking at any other resources such as googling stack-overflow, documentation or course materials. However, you may ask the interviewer clarifying questions at any point.
