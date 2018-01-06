@@ -34,6 +34,11 @@ describe('Todo API:', function () {
       .then(() => Todo.insertMany(seedData));
   });
 
+  /*
+  * NON STANDARD:
+  * Do not drop database after each test in ord allows student to inspect the DB
+  * and make Postman or CURL calls to the endpoints 
+  */
   // afterEach(function () {
   //   return mongoose.connection.dropDatabase();
   // });
