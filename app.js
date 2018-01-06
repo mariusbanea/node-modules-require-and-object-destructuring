@@ -1,0 +1,1 @@
+const {add, subtract, multiply, divide} = require('./modules/calculator');

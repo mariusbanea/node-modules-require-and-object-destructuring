@@ -3,13 +3,7 @@ Live coding practice interview question
 
 ## Overview
 
-This is a FullStack Todo Application, the client is based on [Todo MVC](http://todomvc.com/)
-
-- Stack:
-  - Client: Basic jQuery selectors, event-handlers, DOM manipulation and AJAX
-  - Web Server: Node and Express with Mongoose 
-  - Database: Mongo hosted by [MLab](mlab.com)
-  - Tests: Mocha, Chai, Chai-Http and Shai-Spies
+This is a simple live coding challenge
 
 ## The "Rules"
 
@@ -23,22 +17,13 @@ You should attempt to complete this challenge without looking at any other resou
 
 ## Setup
 
-- Go to `mLab.com` and create a new Sandbox database
-- Create a User for this database:  
-  - Click "Users" tab and then click "Add database user"
-  - Enter "Username" and "Password"
-- Copy the `mongodb://...` URI to the `.env` file in this project
-
-```
-DATABASE_URL=mongodb://<USER>:<PASSWORD>@ds112345.mlab.com:12345/<DBNAME>
-```
-
 - Open the "Logs" in this project
-- You should see output from 10 integration tests, some will be failing.
+- You should see output from the Mocha/Chai tests, some will be failing.
 
 ## Exercise
 
-- ...
+- In the `modules/calculator.js` file, export an object whose properties are the functions `add`, `subtract`, `multiply`, `divide`. You may create the object using any ES5 syntax or ES6's new object initialize shorthand. The latter is preferred.
+
 - The test results will help guide the way
 
 You have successfully completed the task when all the unit tests pass and the client applications works without any errors.
