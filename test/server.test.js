@@ -31,9 +31,7 @@ describe('Todo API:', function () {
   beforeEach(function () {
     return mongoose.connection
       .dropDatabase()
-      .then(() => {
-        Todo.insertMany(seedData);
-      });
+      .then(() => Todo.insertMany(seedData));
   });
 
   // afterEach(function () {
@@ -63,15 +61,6 @@ describe('Todo API:', function () {
       });
 
     });
-
-    it('should respond with CORS headers', function () {
-      return chai.request(app)
-        .get('/v1/todos')
-        .then(res => {
-          res.should.have.header('Access-Control-Allow-Origin', '*');
-        });
-    });
-
 
   });
 
@@ -257,6 +246,5 @@ describe('Todo API:', function () {
     });
 
   });
-
 
 });
