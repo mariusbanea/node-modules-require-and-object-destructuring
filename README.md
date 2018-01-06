@@ -2,9 +2,12 @@ Live coding practice interview question
 =======================================
 
 The "Rules":
-- You should attempt to complete this challenge without looking at any other resources such as online documentation, course curriculum or materials.
-- If you get stuck you have 3 lifeline (yes, just like Who Wants to Be a Millionaire)
-you may ask the interviewer 
+- You should attempt to complete this challenge without looking at any other resources such as googling stack-overflow, documentation or course materials. However, you may ask the interviewer clarifying questions at any point.
+- If you get stuck you have 3 lifelines (like Who Wants to Be a Millionaire)
+  - 1) Online documentation - browse Express, Mongoose, Chai, Chai-Http docs
+  - 2) Interview Hint - Ask the interview for a hint
+  - 3) Google search - 30 seconds of google search in 
+ 
 
 Getting Started:
 
