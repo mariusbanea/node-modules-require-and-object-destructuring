@@ -33,6 +33,23 @@ app.get('/v1/todos/:id', (req, res, next) => {
     .catch(next); // error handler
 });
 
+app.post('/v1/todos', (req, res, next) => {
+  const { title } = req.body;
+
+  /***** Never trust users - validate input *****/
+  if (!title) {
+    const err = new Error('Missing `title` in request body');
+    err.status = 400;
+    return next(err); // error handler
+  }
+
+  // Using promises
+  Todo.create({title})
+    .then(newItem => res.location(`/items/${newItem.id}`).status(201).json(newItem))
+    .catch(next); // error handler
+
+});
+
 // app.put('/v1/todos/:id', (req, res, next) => {
 //   const id = req.params.id;
 //   /***** Never trust users - validate input *****/

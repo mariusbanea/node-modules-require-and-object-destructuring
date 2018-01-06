@@ -100,10 +100,9 @@ describe('Todo API:', () => {
         });
     });
 
-    it.only('should respond with a 404 when given an invalid id', function () {
+    it('should respond with a 404 when given an invalid id', function () {
       const spy = chai.spy();
       return chai.request(app)
-        .get('/v1/todos/5a50f828d63e165f3504e9c2')
         .get('/v1/todos/aaaaaaaaaaaaaaaaaaaaaaaa')
         .then(spy)
         .then(() => {
@@ -113,12 +112,12 @@ describe('Todo API:', () => {
           err.response.should.have.status(404);
         });
     });
-
+    
   });
 
   describe('POST /v1/todos', function () {
 
-    it('should create and return a new item when provided valid data', function () {
+    it.only('should create and return a new todo when provided valid data', function () {
       const newItem = {
         'title': 'Do Dishes'
       };
