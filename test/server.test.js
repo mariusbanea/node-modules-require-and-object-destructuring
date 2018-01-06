@@ -29,24 +29,17 @@ describe('Todo API:', function () {
   });
   
   beforeEach(function () {
-    return mongoose.connection
-      .dropDatabase()
+    return mongoose.connection.dropDatabase()
       .then(() => Todo.insertMany(seedData));
   });
 
-  /*
-  * NON-STANDARD:
-  * 
-  * To allow students to query the DB and make Postman or CURL calls
-  * to the endpoints we do *DNOT* dropDatabase after each test 
-  */
-  // afterEach(function () {
-  //   return mongoose.connection.dropDatabase();
-  // });
+  afterEach(function () {
+    return mongoose.connection.dropDatabase();
+  }); 
 
   after(function () {
     return mongoose.disconnect();
-  });
+  }); 
 
   describe('GET /v1/todos', function () {
 

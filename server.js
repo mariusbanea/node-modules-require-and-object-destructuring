@@ -111,11 +111,11 @@ app.use(function (err, req, res, next) {
 
 
 if (require.main === module) {
-  
+  console.log('============ SERVER RUNNING ==========')
   mongoose.connect(DATABASE_URL, { useMongoClient: true })
     .then(() => {
       Todo.insertMany(seedData);  
-    })
+    }) 
     .catch(err => {
       console.error('ERROR: Mongoose failed to connect! Is the database running?');
       console.error(err);
