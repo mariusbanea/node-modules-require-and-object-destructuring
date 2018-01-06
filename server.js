@@ -7,7 +7,9 @@ const { PORT, DATABASE_URL } = require('./config');
 
 const seedData = require('./db/todos.json');
 
+
 const app = express(); 
+app.use(express.static('public'));
 app.use(express.json());
 
 app.get('/v1/todos', (req, res, next) => {
@@ -25,7 +27,7 @@ app.get('/v1/todos/:id', (req, res, next) => {
       } else { 
         next();
       }
-    })
+    }) 
     .catch(next);
 });
 

@@ -1,15 +1,15 @@
 Live coding practice interview question
 =======================================
 
-The "Rules":
+## The "Rules"
+
 - You should attempt to complete this challenge without looking at any other resources such as googling stack-overflow, documentation or course materials. However, you may ask the interviewer clarifying questions at any point.
 - If you get stuck you have 3 lifelines (like Who Wants to Be a Millionaire)
   - 1) Online documentation - browse Express, Mongoose, Chai, Chai-Http docs
   - 2) Interview Hint - Ask the interview for a hint
-  - 3) Google search - 30 seconds of google search in 
- 
+  - 3) Google search - 30 seconds of google search including stack-overflow
 
-Getting Started:
+## Setup
 
 - Go to `mLab.com` and create a new Sandbox database
 - Create a User for this database:  
@@ -24,3 +24,4 @@ DATABASE_URL=mongodb://<USER>:<PASSWORD>@ds112345.mlab.com:12345/<DBNAME>
 - Open the "Logs" in this project
 - You should see output from 10 integration tests
 
+## Test
