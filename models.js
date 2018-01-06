@@ -1,20 +1,10 @@
-
 const mongoose = require('mongoose');
 
 const todoSchema = mongoose.Schema({
-  fullname: String,
-  username: String,
-  password: String
+  title: String,
+  completed: Boolean
 });
 
-userSchema.methods.serialize = function() {
-  return {
-    id: this._id,
-    fullname: this.fullname,
-    password: this.password,
-  };
-};
+const Todo = mongoose.model("Todo", todoSchema);
 
-const User = mongoose.model("User", userSchema);
-
-module.exports = User;
+module.exports = Todo;
