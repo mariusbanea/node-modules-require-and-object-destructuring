@@ -4,10 +4,12 @@ const app = require('../server');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const chaiSpies = require('chai-spies');
-
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-const { Todo } = require('../models');
+
+
+const Todo = require('../models');
+const seedData = require('../db/todos.json');
 const { DATABASE_URL } = require('../config');
 
 chai.should();
@@ -40,20 +42,6 @@ describe('Todo API:', () => {
   });
   
   describe('Basic Express setup', function () {
-
-    describe('Express static', function () {
-
-      it('GET request "/" should return the index page', function () {
-        return chai.request(app)
-          .get('/')
-          .then(function (res) {
-            res.should.exist;
-            res.should.have.status(200);
-            res.should.be.html;
-          });
-      });
-
-    });
 
     describe('404 handler', function () {
 
