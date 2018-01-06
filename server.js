@@ -11,13 +11,11 @@ const app = express();
 app.use(express.static('public'));
 app.use(express.json());
 
-app.get('/v1/todos', (req, res, next) => {
-  Todo.find()
-    .then(todos => res.json(todos.map(todo => todo.serialize())))
-    .catch(next);
+app.get('/items', (req, res, next) => {
+  data.find
 });
 
-app.get('/v1/todos/:id', (req, res, next) => {
+app.get('/items/:id', (req, res, next) => {
   const id = req.params.id;
   Todo.findById(id)
     .then(item => {
@@ -30,7 +28,7 @@ app.get('/v1/todos/:id', (req, res, next) => {
     .catch(next);
 });
 
-app.post('/v1/todos', (req, res, next) => {
+app.post('/items', (req, res, next) => {
   const { title } = req.body;
 
   /***** Never trust users - validate input *****/
@@ -51,7 +49,7 @@ app.post('/v1/todos', (req, res, next) => {
 
 });
 
-app.put('/v1/todos/:id', (req, res, next) => {
+app.put('/items/:id', (req, res, next) => {
   const id = req.params.id;
   /***** Never trust users - validate input *****/
   const updateItem = {};
@@ -79,7 +77,7 @@ app.put('/v1/todos/:id', (req, res, next) => {
     .catch(next);
 });
 
-app.delete('/v1/todos/:id', (req, res, next) => {
+app.delete('/items/:id', (req, res, next) => {
   const id = req.params.id;
   // Using promises
   Todo.findByIdAndRemove(id)
@@ -111,19 +109,10 @@ app.use(function (err, req, res, next) {
 
 
 if (require.main === module) {
-  console.log('============ SERVER RUNNING ==========')
-  mongoose.connect(DATABASE_URL, { useMongoClient: true })
-    .then(() => {
-      Todo.insertMany(seedData);  
-    }) 
-    .catch(err => {
-      console.error('ERROR: Mongoose failed to connect! Is the database running?');
-      console.error(err);
-    });  
   
   const server = app.listen(PORT, function () {
     console.log('Your app is listening on port ' + server.address().port);
   });
 }
 
-module.exports = app; // Export for testing
+module.exports = app;
