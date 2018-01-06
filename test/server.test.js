@@ -63,7 +63,7 @@ describe('Todo API:', () => {
 
   });
 
-  describe('GET /v1/todos', function () {
+  describe.only('GET /v1/todos', function () {
 
     it('should respond to GET `/v1/todos` with an array of todos and status 200', function () {
       return chai.request(app)

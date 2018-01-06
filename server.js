@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const User = require('./models');
+const Todo = require('./models');
 const { PORT, DATABASE_URL } = require('./config');
 
 const app = express(); 
@@ -12,16 +12,13 @@ app.use(express.json()); // Parse JSON body
 /**
  * ADD ENDPOINTS HERE
  */
-app.get('/', (req, res, next) => {
-
-  // Using promises
-  todos.find({})
+app.get('/v1/todos', (req, res, next) => {
+  Todo.find()
     .then(list => res.json(list))
     .catch(next); // error handler
-
 });
 
-app.post('/', (req, res, next) => {
+app.post('/v1/todos', (req, res, next) => {
   const { title } = req.body;
 
   /***** Never trust users - validate input *****/
@@ -40,7 +37,7 @@ app.post('/', (req, res, next) => {
 
 });
 
-app.get('/:id', (req, res, next) => {
+app.get('/v1/todos/:id', (req, res, next) => {
   const id = req.params.id;
 
   // Using promises
@@ -56,7 +53,7 @@ app.get('/:id', (req, res, next) => {
 
 });
 
-app.put('/:id', (req, res, next) => {
+app.put('/v1/todos/:id', (req, res, next) => {
   const id = req.params.id;
 
   /***** Never trust users - validate input *****/
@@ -89,7 +86,7 @@ app.put('/:id', (req, res, next) => {
 
 });
 
-app.delete('/:id', (req, res, next) => {
+app.delete('/v1/todos/:id', (req, res, next) => {
   const id = req.params.id;
 
   // Using promises
