@@ -5,6 +5,10 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const chaiSpies = require('chai-spies');
 
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+const { Restaurant } = require('../models');
+
 chai.should();
 const expect = chai.expect; 
 const assert = require('chai').assert;
@@ -14,6 +18,27 @@ chai.use(chaiSpies);
 
 describe('Todo API:', () => {
 
+before(function () {  
+  // This connection applies to both the test script and the app being tested 
+  return mongoose.connect(TEST_DATABASE, { useMongoClient: true })
+    .catch(err => {
+      console.error('ERROR: Mongoose failed to connect! Is the database running?');
+      console.error(err);
+    });
+});
+  
+  beforeEach(function () {
+    return Todo.insertMany(seedData);
+  });
+
+  afterEach(function () {
+    return mongoose.connection.dropDatabase();
+  });
+
+  after(function () {
+    return mongoose.disconnect();
+  });
+  
   describe('Basic Express setup', function () {
 
     describe('Express static', function () {
