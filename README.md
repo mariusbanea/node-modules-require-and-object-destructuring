@@ -22,7 +22,10 @@ You should attempt to complete this challenge without looking at any other resou
 
 ## Exercise
 
-- In the `modules/calculator.js` file, export an object whose properties are the functions `add`, `subtract`, `multiply`, `divide`. You may create the object using any ES5 syntax or ES6's new object initialize shorthand. The latter is preferred.
+- In the `modules/calculator.js`, export an object whose properties are the functions `add`, `subtract`, `multiply`, `divide` using ES6 Object initialize shorthand.
+- In the `app.js` require the calculator module assign the properties to variables using ES6 Object descrtucturing syntax.
+
+
 
 - The test results will help guide the way
 

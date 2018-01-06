@@ -13,4 +13,14 @@ describe('Calculator Module', function () {
   });
 
 });
- 
+
+
+describe('App parent file', function () {
+
+  it('should require module and destructure the properties', function () {
+    const calculator = require('../app')
+    calculator.should.be.an('object');
+    calculator.should.have.all.keys('add', 'subtract', 'multiply', 'divide');
+  });
+
+});
