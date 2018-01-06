@@ -17,7 +17,7 @@ app.use(express.json()); // Parse JSON body
 app.get('/v1/todos', (req, res, next) => {
   Todo.find()
     .then(todos => res.json(todos.map(todo => todo.serialize())))
-    .catch(next); // error handler
+    .catch(next);
 });
 
 app.get('/v1/todos/:id', (req, res, next) => {
@@ -27,10 +27,10 @@ app.get('/v1/todos/:id', (req, res, next) => {
       if (item) {
         res.json(item.serialize());
       } else {
-        next(); // 404 handler
+        next();
       }
     })
-    .catch(next); // error handler
+    .catch(next);
 });
 
 app.post('/v1/todos', (req, res, next) => {
@@ -40,13 +40,13 @@ app.post('/v1/todos', (req, res, next) => {
   if (!title) {
     const err = new Error('Missing `title` in request body');
     err.status = 400;
-    return next(err); // error handler
+    return next(err);
   }
 
   // Using promises
   Todo.create({title})
-    .then(newItem => res.location(`/items/${newItem.id}`).status(201).json(newItem))
-    .catch(next); // error handler
+    .then(newItem => res.location(`/items/${newItem.id}`).status(201).json(newItem.serialize()))
+    .catch(next);
 
 });
 

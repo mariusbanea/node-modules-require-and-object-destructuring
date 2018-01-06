@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const todoSchema = mongoose.Schema({
   title: String,
-  completed: Boolean
+  completed: {type: Boolean, default: false}
 });
 
 todoSchema.methods.serialize = function() {
