@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const User = require('./models');
-const { PORT } = require('./config');
+const { PORT, DATABASE_URL } = require('./config');
 
 const app = express(); 
 
