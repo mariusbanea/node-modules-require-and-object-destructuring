@@ -3,7 +3,8 @@ Live coding practice interview question
 
 ## Overview
 
-- Application: FullStack Todo Application, the client is based on [Todo MVC](http://todomvc.com/)
+This is a FullStack Todo Application, the client is based on [Todo MVC](http://todomvc.com/)
+
 - Stack:
   - Client: Basic jQuery selectors, event-handlers, DOM manipulation and AJAX
   - Web Server: Node and Express with Mongoose 
@@ -12,13 +13,13 @@ Live coding practice interview question
 
 ## The "Rules"
 
+You should attempt to complete this challenge without looking at any other resources such as googling, stack-overflow, documentation or course materials. However, you may look at any of the files in the project including the schema in the `models.js` file and the integration tests in `test/server.test.js` and you may ask the interviewer clarifying questions at any point.
 
-- You should attempt to complete this challenge without looking at any other resources such as googling, stack-overflow, documentation or course materials. However, you may look at any of the files in the project including the schema in the `models.js` file and the integration tests in `test/server.test.js` and you may ask the interviewer clarifying questions at any point.
-
-- If you get stuck you have 3 lifelines (like Who Wants to Be a Millionaire)
+### 3 Lifelines
+- If you get stuck, you have 3 lifelines (like "Who Wants to Be a Millionaire")
   - 1) Online documentation - browse Express, Mongoose, Chai, Chai-Http docs
   - 2) Interview Hint - Ask the interview for a hint
-  - 3) Google search - 30 seconds of google search including stack-overflow
+  - 3) Google search - one time google search including stack-overflow and docs
 
 ## Setup
 
@@ -33,14 +34,10 @@ DATABASE_URL=mongodb://<USER>:<PASSWORD>@ds112345.mlab.com:12345/<DBNAME>
 ```
 
 - Open the "Logs" in this project
-- You should see output from 10 integration tests
+- You should see output from 10 integration tests, some will be failing.
 
-## Test
+## Exercise
 
-## Test
-
-Add the GET `/v1/todos/` endpoint to this application.
+...
 
 You have successfully completed the task when all the unit tests pass and the client applications works without any errors.
-
-You may look at any of the files in the project including the schema in the `models.js` file and the integration tests in `test/server.test.js`
