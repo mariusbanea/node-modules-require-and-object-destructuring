@@ -22,7 +22,7 @@ app.get('/v1/todos/:id', (req, res, next) => {
     .then(item => {
       if (item) {
         res.json(item.serialize());
-      } else {
+      } else { 
         next();
       }
     })
@@ -38,12 +38,12 @@ app.post('/v1/todos', (req, res, next) => {
     err.status = 400;
     return next(err);
   }
-
+  
   // Using promises
   Todo.create({title})
     .then(newItem => {
       res.status(201)
-        .location(`/items/${newItem.id}`)
+        .location(`${req.originalUrl}/${newItem.id}`)
         .json(newItem.serialize());
   })
     .catch(next);

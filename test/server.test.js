@@ -69,7 +69,7 @@ describe('Todo API:', function () {
     it('should respond to GET `/v1/todos` with an array of todos and status 200', function () {
       return chai.request(app)
         .get('/v1/todos')
-        .then((res) => {
+        .then(res => {
           res.should.have.status(200);
           res.should.be.json;
           res.body.should.be.a('array');
@@ -129,14 +129,14 @@ describe('Todo API:', function () {
       return chai.request(app)
         .post('/v1/todos')
         .send(newItem)
-        .then((res) => {
+        .then(res => {
           res.should.have.status(201);
           res.should.be.json;
           res.body.should.be.a('object');
           res.body.should.include.keys('id', 'title', 'completed');
           res.body.title.should.equal(newItem.title);
           res.body.completed.should.equal(false);
-          res.should.have.header('location');
+          res.should.have.header('location', `/v1/todos/${res.body.id}`);
         });
     });
 
