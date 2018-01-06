@@ -7,7 +7,6 @@ const chaiSpies = require('chai-spies');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-
 const Todo = require('../models');
 const seedData = require('../db/todos.json');
 const { DATABASE_URL } = require('../config');
@@ -24,18 +23,22 @@ describe('Todo API:', () => {
   before(function () {  
     return mongoose.connect(DATABASE_URL, { useMongoClient: true })
       .catch(err => {
-        console.error('ERROR: Mongoose failed to connect! Is the database running?');
+        console.error("ERROR: Mongoose failed to connect! Did you configure DATABASE_URL in the '.env'?");
         console.error(err);
       });
   });
   
   beforeEach(function () {
-    return Todo.insertMany(seedData);
+    return mongoose.connection
+      .dropDatabase()
+      .then(() => {
+        Todo.insertMany(seedData);
+      });
   });
 
-  afterEach(function () {
-    return mongoose.connection.dropDatabase();
-  });
+  // afterEach(function () {
+  //   return mongoose.connection.dropDatabase();
+  // });
 
   after(function () {
     return mongoose.disconnect();

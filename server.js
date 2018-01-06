@@ -20,35 +20,18 @@ app.get('/v1/todos', (req, res, next) => {
     .catch(next); // error handler
 });
 
-// app.post('/v1/todos', (req, res, next) => {
-//   const { title } = req.body;
-//   /***** Never trust users - validate input *****/
-//   if (!title) {
-//     const err = new Error('Missing `title` in request body');
-//     err.status = 400;
-//     return next(err); // error handler
-//   }
-//   const newItem = { title };
-//   newItem.completed = false;
-//   // Using promises
-//   todos.create(newItem)
-//     .then(item => res.location(`/items/${item.id}`).status(201).json(item))
-//     .catch(next); // error handler
-// });
-
-// app.get('/v1/todos/:id', (req, res, next) => {
-//   const id = req.params.id;
-//   // Using promises
-//   todos.findById(id)
-//     .then(item => {
-//       if (item) {
-//         res.json(item);
-//       } else {
-//         next(); // 404 handler
-//       }
-//     })
-//     .catch(next); // error handler
-// });
+app.get('/v1/todos/:id', (req, res, next) => {
+  const id = req.params.id;
+  Todo.findById(id)
+    .then(item => {
+      if (item) {
+        res.json(item);
+      } else {
+        next(); // 404 handler
+      }
+    })
+    .catch(next); // error handler
+});
 
 // app.put('/v1/todos/:id', (req, res, next) => {
 //   const id = req.params.id;

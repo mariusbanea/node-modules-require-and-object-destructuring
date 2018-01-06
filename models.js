@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const todoSchema = mongoose.Schema({
+  _id: Number,
   title: String,
   completed: Boolean
 });
