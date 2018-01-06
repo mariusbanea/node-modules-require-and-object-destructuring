@@ -16,8 +16,7 @@ app.use(express.json()); // Parse JSON body
  */
 app.get('/v1/todos', (req, res, next) => {
   Todo.find()
-    // .then(list => res.json(list.serialize()))
-    .then(foo => res.json(foo))
+    .then(todos => res.json(todos.map(todo => todo.serialize())))
     .catch(next); // error handler
 });
 
