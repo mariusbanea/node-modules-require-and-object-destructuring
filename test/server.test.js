@@ -47,28 +47,6 @@ describe('Todo API:', function () {
   after(function () {
     return mongoose.disconnect();
   });
-  
-  describe('Basic Express setup', function () {
-
-    describe('404 handler', function () {
-
-      it('should respond with 404 when given a bad path', function () {
-        const spy = chai.spy();
-        return chai.request(app)
-          .get('/bad/path')
-          .then(spy)
-          .then(() => {
-            spy.should.not.have.been.called();
-          })
-          .catch(err => {
-            err.response.should.have.status(404);
-            err.response.body.message.should.equal('Not Found');
-          });
-      });
-
-    });
-
-  });
 
   describe('GET /v1/todos', function () {
 
