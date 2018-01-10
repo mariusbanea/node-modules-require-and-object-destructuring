@@ -29,4 +29,4 @@ You should attempt to complete this challenge without looking at any other resou
 
 - The test results will help guide the way
 
-You have successfully completed the task when all the unit tests pass and the client applications works without any errors.
+You have successfully completed the task when all the unit tests pass.
