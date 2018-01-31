@@ -2,9 +2,9 @@
  * require the calculator module and unpack the properties using ES6 object destructuring
  *************/
 
-const calculator  = require('./calculator.js');
+const action  = require('./modules/calculator.js');
 
-const {add, subtract, multiply, divide}= action;
+const {add, subtract, multiply, divide} = action;
 
 
 
