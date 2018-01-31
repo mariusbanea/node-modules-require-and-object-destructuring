@@ -2,7 +2,7 @@
  * require the calculator module and unpack the properties using ES6 object destructuring
  *************/
 
-
+const calculator  = require('./calculator.js');
 
 
 
