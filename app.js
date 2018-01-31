@@ -4,6 +4,9 @@
 
 const calculator  = require('./calculator.js');
 
+const {add, subtract, multiply, divide}= function();
+
+
 
 
 
