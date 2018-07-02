@@ -3,7 +3,7 @@
  *************/
 
 const action  = require('./modules/calculator.js');
-console.log(action);
+//console.log(action);
 const {add, subtract, multiply, divide} = action;
 
 

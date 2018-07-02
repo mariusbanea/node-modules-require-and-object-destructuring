@@ -12,9 +12,9 @@ const action = {
     return a / b;
   }
 } 
-console.log(action.add);
+console.log(action);
 
-module.export = {action} ;
+module.exports = action;
 
 
 
